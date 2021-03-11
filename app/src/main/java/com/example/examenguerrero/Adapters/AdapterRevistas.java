@@ -22,12 +22,14 @@ public class AdapterRevistas extends ArrayAdapter<revistas>{
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View item = inflater.inflate(R.layout.ly_items_revistas,null);
 
+        TextView lblid = (TextView)item.findViewById(R.id.lblidrevista);
         TextView lbltitulo = (TextView)item.findViewById(R.id.lblnamerevista);
         TextView lbldescription = (TextView)item.findViewById(R.id.lbldescription);
         ImageView imageView = (ImageView) item.findViewById(R.id.imgRevista);
 
         Glide.with(this.getContext()).load(getItem(position).getUrlRevista()).into(imageView);
 
+        lblid.setText(getItem(position).getId());
         lbltitulo.setText("Título: "+getItem(position).getName());
         lbldescription.setText("Título: "+getItem(position).getDescription());
 
