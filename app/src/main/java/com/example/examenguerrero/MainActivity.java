@@ -3,6 +3,7 @@ package com.example.examenguerrero;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -48,10 +49,9 @@ public class MainActivity extends AppCompatActivity {
         stringr = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                ArrayList<com.example.examenguerrero.Models.revistas> revistas = new ArrayList<revistas>();
+                ArrayList<com.example.examenguerrero.Models.revistas> revistas = new ArrayList<com.example.examenguerrero.Models.revistas>();
                 try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    JSONArray jsonArray = jsonObject.getJSONArray("");
+                    JSONArray jsonArray = new JSONArray(response);
                     revistas = com.example.examenguerrero.Models.revistas.JsonObjecBuild(jsonArray);
 
                     AdapterRevistas adapterRevistas = new AdapterRevistas(MainActivity.this,revistas);
@@ -63,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Error: "+ error.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("Este es: ", error.getMessage());
             }
         });
         request.add(stringr);
