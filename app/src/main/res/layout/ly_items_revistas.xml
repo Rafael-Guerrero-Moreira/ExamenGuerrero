@@ -26,19 +26,18 @@
         android:orientation="horizontal">
         <TextView
             android:id="@+id/lblidrevista"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:text="n"
             android:textAlignment="center"
-            android:textSize="30sp"
+            android:textSize="12sp"
             android:textStyle="bold" />
         <TextView
             android:id="@+id/lblnamerevista"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text="Titulo"
-            android:textAlignment="center"
-            android:textSize="30sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -52,7 +51,7 @@
             android:layout_height="match_parent"
             android:text="Descripción"
             android:textAlignment="center"
-            android:textSize="20dp"
+            android:textSize="12dp"
             android:textStyle="bold" />
         </ScrollView>
     </LinearLayout>
