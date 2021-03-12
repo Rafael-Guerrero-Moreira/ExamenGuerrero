@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="129dp"
+        android:layout_height="160dp"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -15,22 +15,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Titulo"
-            android:textSize="30sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/lblautores"
+            android:id="@+id/lblsection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Autores"
-            android:textSize="20dp"
+            android:text="Section"
+            android:textSize="16dp"
             android:textStyle="bold" />
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PDF"
-            android:layout_gravity="center"
-            android:backgroundTint="#67A126"/>
+            android:text="Descargar Artículo"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_gravity="center"/>
     </LinearLayout>
 
 </LinearLayout>

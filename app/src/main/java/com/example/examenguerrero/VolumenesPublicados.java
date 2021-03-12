@@ -2,9 +2,11 @@ package com.example.examenguerrero;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -45,6 +47,13 @@ public class VolumenesPublicados extends AppCompatActivity {
         volumeness.addHeaderView(header);
 
         enviar();
+
+        volumeness.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(VolumenesPublicados.this,ArticulosVolumen.class).putExtra("idvol", volumenes.get(position-1).getIdvol()));
+            }
+        });
 
 
     }
