@@ -1,6 +1,7 @@
 package com.example.examenguerrero.Adapters;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +31,8 @@ public class AdapterRevistas extends ArrayAdapter<revistas>{
         Glide.with(this.getContext()).load(getItem(position).getUrlRevista()).into(imageView);
 
         lblid.setText(getItem(position).getId());
-        lbltitulo.setText("Título: "+getItem(position).getName());
-        lbldescription.setText("Título: "+getItem(position).getDescription());
+        lbltitulo.setText(getItem(position).getName());
+        lbldescription.setText(Html.fromHtml(getItem(position).getDescription()));
 
         return item;
     }
