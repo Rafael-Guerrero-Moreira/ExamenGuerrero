@@ -2,9 +2,12 @@ package com.example.examenguerrero;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,6 +24,7 @@ import com.example.examenguerrero.Models.volumenes;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -44,6 +48,13 @@ public class ArticulosVolumen extends AppCompatActivity {
         View header= getLayoutInflater().inflate(R.layout.ly_header_articulos,null);
         articuloss.addHeaderView(header);
         enviar();
+        articuloss.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(articulos.get(position-1).getUrlDoc())));
+            }
+        });
+
     }
 
     public void enviar(){
@@ -56,6 +67,35 @@ public class ArticulosVolumen extends AppCompatActivity {
                 articulos = new ArrayList<com.example.examenguerrero.Models.articulos>();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
+                    articulos = com.example.examenguerrero.Models.articulos.JsonObjecBuild(jsonArray);
+
+                    AdapterArticulos adapterArticulos = new AdapterArticulos(ArticulosVolumen.this,articulos);
+                    articuloss.setAdapter(adapterArticulos);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ArticulosVolumen.this, "Error: "+ error.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("Este es: ", error.getMessage());
+            }
+        });
+        request.add(stringr);
+    }
+
+    public void enviarPDF(){
+        request = Volley.newRequestQueue(ArticulosVolumen.this);
+        String URL = "https://revistas.uteq.edu.ec/ws/pubs.php?i_id="+idante;
+
+        stringr = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                articulos = new ArrayList<com.example.examenguerrero.Models.articulos>();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("galeys");
                     articulos = com.example.examenguerrero.Models.articulos.JsonObjecBuild(jsonArray);
 
                     AdapterArticulos adapterArticulos = new AdapterArticulos(ArticulosVolumen.this,articulos);
