@@ -35,7 +35,7 @@ public class AdapterVolumen extends ArrayAdapter<volumenes> {
 
         lblid.setText(getItem(position).getIdvol());
         lbltitulo.setText(getItem(position).getTitulo());
-        lblfecha.setText(Html.fromHtml(getItem(position).getFecha()));
+        lblfecha.setText(getItem(position).getFecha());
 
         return item;
     }
