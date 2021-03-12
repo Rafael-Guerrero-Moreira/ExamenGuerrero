@@ -19,12 +19,12 @@ import java.util.ArrayList;
 
 public class AdapterVolumen extends ArrayAdapter<volumenes> {
     public AdapterVolumen(Context context, ArrayList<volumenes> datos){
-        super(context, R.layout.ly_header_volumenes,datos);
+        super(context, R.layout.ly_items_volumenes,datos);
     }
 
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View item = inflater.inflate(R.layout.ly_header_volumenes,null);
+        View item = inflater.inflate(R.layout.ly_items_volumenes,null);
 
         TextView lblid = (TextView)item.findViewById(R.id.lblidvolumen);
         TextView lbltitulo = (TextView)item.findViewById(R.id.lblnamevol);

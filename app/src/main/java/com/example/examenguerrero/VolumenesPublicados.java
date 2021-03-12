@@ -36,21 +36,22 @@ public class VolumenesPublicados extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_volumenes_publicados);
+        idant = (String) getIntent().getExtras().get("id");
+        Toast.makeText(VolumenesPublicados.this, "valor: "+ idant, Toast.LENGTH_SHORT).show();
+
 
         volumeness = (ListView)findViewById(R.id.lstvVolumenes);
         View header= getLayoutInflater().inflate(R.layout.ly_header_volumenes,null);
-
         volumeness.addHeaderView(header);
-        Bundle para = new Bundle();
-        idant = para.getString("id");
-        enviar(idant);
+
+        enviar();
 
 
     }
 
-    public void enviar(String idrevista){
+    public void enviar(){
         request = Volley.newRequestQueue(VolumenesPublicados.this);
-        String URL = "https://revistas.uteq.edu.ec/ws/issues.php?j_id="+idrevista;
+        String URL = "https://revistas.uteq.edu.ec/ws/issues.php?j_id="+idant;
 
         stringr = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
