@@ -28,7 +28,8 @@ public class VolumenesPublicados extends AppCompatActivity {
     private RequestQueue request;
     private StringRequest stringr;
     private ListView volumeness;
-    private String idrevista;
+    String idant;
+    ArrayList<volumenes> volumenes;
 
 
     @Override
@@ -40,16 +41,21 @@ public class VolumenesPublicados extends AppCompatActivity {
         View header= getLayoutInflater().inflate(R.layout.ly_header_volumenes,null);
 
         volumeness.addHeaderView(header);
+        Bundle para = new Bundle();
+        idant = para.getString("id");
+        enviar(idant);
+
+
     }
 
-    public void enviar(){
+    public void enviar(String idrevista){
         request = Volley.newRequestQueue(VolumenesPublicados.this);
         String URL = "https://revistas.uteq.edu.ec/ws/issues.php?j_id="+idrevista;
 
         stringr = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                ArrayList<volumenes> volumenes = new ArrayList<volumenes>();
+                volumenes = new ArrayList<volumenes>();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     volumenes = com.example.examenguerrero.Models.volumenes.JsonObjecBuild(jsonArray);
